@@ -1,0 +1,13 @@
+[Unit]
+Description=slow-scan baseline detector (12 ports in 60 s)
+After=waitparam.service slowscan-monitor.service
+
+[Service]
+Type=simple
+# Threshold 12 is fixed for Milestone 2; it becomes THRESHOLD in Milestone 3.
+ExecStart=/usr/bin/python3 /usr/bin/detector.py --mode baseline --threshold 12 --window 60 --follow /var/log/slowscan/conn.log --out /var/log/slowscan/baseline.log --heartbeat 30
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+#!/bin/bash
+# sshd (started per connection by xinetd, see /etc/xinetd.d/ssh) refuses to run
+# without its privilege-separation directory. /run is a tmpfs in Labtainers
+# containers, so the directory has to be recreated on every boot.
+# /etc/tmpfiles.d/sshd.conf does the same thing; this is the Labtainers
+# convention (labs/tcpip) and a second line of defence.
+mkdir -p /run/sshd
+exit 0

@@ -1,0 +1,14 @@
+[Unit]
+Description=slow-scan connection monitor (writes /var/log/slowscan/conn.log)
+After=waitparam.service network.target
+
+[Service]
+Type=simple
+# root (no User=): packet capture needs CAP_NET_RAW.
+# --backend auto = scapy, falling back to tcpdump if scapy cannot start.
+ExecStart=/usr/bin/python3 /usr/bin/monitor.py --iface eth0 --victim 172.20.0.30 --out /var/log/slowscan/conn.log --backend auto
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

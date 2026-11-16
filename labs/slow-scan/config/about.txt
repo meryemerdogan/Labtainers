@@ -1,0 +1,1 @@
+Detect low-and-slow TCP port scans with a long-window, failure-rate detector.

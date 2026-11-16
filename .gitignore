@@ -5,3 +5,9 @@
 *.log
 *.tar
 /UI/MainUI/target/
+/MakepackUI/target/
+
+# Local editor / OS noise
+.vscode/
+desktop.ini
+Thumbs.db

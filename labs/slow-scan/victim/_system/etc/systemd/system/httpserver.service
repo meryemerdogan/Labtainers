@@ -1,0 +1,16 @@
+[Unit]
+Description=slow-scan victim web server (port 80)
+After=waitparam.service network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/html
+# python3 is named explicitly so the unit works even if the script lost its
+# executable bit (e.g. committed from a Windows checkout).
+ExecStart=/usr/bin/python3 /usr/bin/MyHTTPServer.py --port 80 --root /var/www/html --log /var/log/myhttplogfile.txt
+Restart=on-failure
+RestartSec=2
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target

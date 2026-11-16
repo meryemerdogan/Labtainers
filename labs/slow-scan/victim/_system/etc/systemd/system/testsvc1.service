@@ -1,0 +1,14 @@
+[Unit]
+Description=slow-scan test service 1 (inventory, port 8081)
+After=waitparam.service network.target
+
+[Service]
+Type=simple
+# Port 8081 is fixed for Milestone 2; it becomes TEST_PORT1 in Milestone 3.
+ExecStart=/usr/bin/python3 /usr/bin/testsvc.py 8081 inventory
+User=nobody
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
